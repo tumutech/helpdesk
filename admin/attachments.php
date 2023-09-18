@@ -7,20 +7,6 @@
         <!-- Bootstrap core CSS -->
         <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<?php
-    include_once './config/database.php';
-    include_once './model/Attachments.php';
-    $database = new Database();
-    $db = $database->getConnection();
-    $item = new Attachments($db);
-  
-    if($item->getAttachments()){
-        echo 'Attachments fetched successfully.';
-    echo '</table>';
-    } else{
-        echo 'Attachemnt could not be fetched.';
-    }
-?>
 <body>
     <div class="row">
   <div class="col-sm-2">
@@ -40,6 +26,24 @@
     <h5>List</h5>
     <table border="1px" cellspacing="0px">
         <th>NAME</th><th>FILENAME</th><th>COMMENT</th><th>VALIDITY</th><th>CHANGED</th><th>CREATED</th><th>DELETE</th>
+        <?php
+    include_once './config/database.php';
+    include_once './model/Attachments.php';
+    $database = new Database();
+    $db = $database->getConnection();
+    $item = new Attachments($db);
+$attachments = $item->getAttachments();
+
+foreach ($attachments as $attachment):?>
+   <tr>
+            <td><?php echo $attachment['article_id']; ?></td>
+            <td><?php echo $attachment['filename']; ?></td>
+            <td>Null</td>
+            <td>Null</td>
+            <td><?php echo $attachment['change_time']; ?></td>
+            <td><?php echo $attachment['create_time']; ?></td>
+            <td><a href="#"> Delete</a></td>
+            <?php endforeach; ?> </tr>
     </table>
 </div>
   </div>

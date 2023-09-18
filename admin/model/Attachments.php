@@ -16,12 +16,18 @@
             $this->conn = $db;
         }
         // Getting all to do Attachments from the database
-        public function getAttachments(){
-            $sqlQuery = "SELECT article_id, filename, create_time FROM " . $this->db_table . "";
+        public function getAttachments() {
+            $sqlQuery = "SELECT article_id, filename, create_time,change_time FROM " . $this->db_table . "";
             $stmt = $this->conn->prepare($sqlQuery);
             $stmt->execute();
-            return $stmt;
-        }
+        
+            $attachments = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $attachments[] = $row;
+            }
+        
+            return $attachments;
+        }        
         // Creating a new Attachment and adding it to the database
         public function createAttachment(){
             $sqlQuery = "INSERT INTO
