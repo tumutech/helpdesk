@@ -10,14 +10,14 @@
 </head>
 <body>
     <h5 class = "container">Add Attachment</h5>
-    <form class = "container" action = "./admin/create_attachment.php" method="post">
-        <label>* Name:</label><input type="text">
+    <form class = "container" action = "./api/create_attachment.php" method="post">
+        <label>* Name:</label><input type="text" name="create_by">
         <br>
-        <label> * Attachment: </label><input type="file">
+        <label> * Attachment: </label><input type="text" name="filename">
         <br>
-        <label> * Validity: </label><input type="text">
+        <label> * Validity: </label><input type="text" name="change_by">
         <br>
-        <label disabled>Comment</label><input type="text" disabled>
+        <label disabled>Comment</label><input type="text" name="article_id">
         <br>
         <input type="submit" value="Save"> or <a href="attachments.php">Cancel</a>
     </form>

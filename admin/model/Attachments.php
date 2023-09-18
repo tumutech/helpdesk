@@ -9,15 +9,15 @@
         public $filename;
         public $create_time;
         public $create_by;
-        public $change_time
-        public $change_by;;
+        public $change_time;
+        public $change_by;
         // Db connection
         public function __construct($db){
             $this->conn = $db;
         }
         // Getting all to do Attachments from the database
         public function getAttachments(){
-            $sqlQuery = "SELECT article_article_id, file_name, create_time FROM " . $this->db_table . "";
+            $sqlQuery = "SELECT article_id, filename, create_time FROM " . $this->db_table . "";
             $stmt = $this->conn->prepare($sqlQuery);
             $stmt->execute();
             return $stmt;
@@ -31,7 +31,7 @@
                         create_by = :create_by,
                         change_time = :change_time,
                         change_by = :change_by,
-                        create_time = :create_time",;
+                        create_time = :create_time";
         
             $stmt = $this->conn->prepare($sqlQuery);
         
@@ -42,6 +42,9 @@
             // bind data
             $stmt->bindParam(":filename", $this->filename);
             $stmt->bindParam(":create_time", $this->create_time);
+            $stmt->bindParam(":create_by", $this->create_by);
+            $stmt->bindParam(":change_time", $this->change_time);
+            $stmt->bindParam(":change_by", $this->change_by);
         
             if($stmt->execute()){
                return true;

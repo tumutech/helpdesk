@@ -7,6 +7,20 @@
         <!-- Bootstrap core CSS -->
         <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<?php
+    include_once './config/database.php';
+    include_once './model/Attachments.php';
+    $database = new Database();
+    $db = $database->getConnection();
+    $item = new Attachments($db);
+  
+    if($item->getAttachments()){
+        echo 'Attachments fetched successfully.';
+    echo '</table>';
+    } else{
+        echo 'Attachemnt could not be fetched.';
+    }
+?>
 <body>
     <div class="row">
   <div class="col-sm-2">
