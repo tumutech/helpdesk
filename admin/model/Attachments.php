@@ -104,12 +104,9 @@
         }
         // Deleting a single Attachment from the database
         function deleteAttachment($article_id){
-            $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE article_article_id = ?";
+            $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE article_id = ?";
             $stmt = $this->conn->prepare($sqlQuery);
-        
-            $this->article_id=htmlspecialchars(strip_tags($this->article_article_id));
-        
-            $stmt->bindParam(1, $this->article_article_id);
+            $stmt->bindParam(1, $this->article_id);
         
             if($stmt->execute()){
                 return true;

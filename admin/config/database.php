@@ -1,7 +1,7 @@
 <?php 
     class Database {
         private $host = "localhost";
-        private $database_name = "helpdesk_db";
+        private $database_name = "musthelpdesk_db";
         private $username = "root";
         private $password = "";
         public $conn;
