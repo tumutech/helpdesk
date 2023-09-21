@@ -25,7 +25,7 @@
       <div class="card">
   <div class="card-body">
   <span data-feather="file"></span>
-    <h5 class="card-title">Attachments</h5>
+    <h5 class="card-title">tickets</h5>
     <h6 class="card-subtitle mb-2 text-muted">0</h6>
   </div>
 </div>
@@ -55,88 +55,28 @@
       <h2>Pending Tickets</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm" border=1px bordercolor="gray">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Subject</th>
-              <th>Service</th>
-              <th>Owner</th>
-              <th>Re-assign</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>text</td>
-              <td>random</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>placeholder</td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>placeholder</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>irrelevant</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-
-          </tbody>
+          <th>Ticket no</th>
+          <th>Customer ID</th>
+          <th> Message</th>
+          <th>Created</th>
+          <th>Actions</th>
+        <?php
+    include_once './config/database.php';
+    include_once './model/Ticket.php';
+    $database = new Database();
+    $db = $database->getConnection();
+    $item = new Tickets($db);
+$tickets = $item->getTickets();
+foreach ($tickets as $ticket):?>
+<tr>
+            <td><?php echo $ticket['ticket_num']; ?></td>
+            <td><?php echo $ticket['customer_userID']; ?></td>
+            <!-- <td><?php echo $ticket['title']; ?></td> -->
+            <td><?php echo $ticket['message']; ?></td>
+            <td><?php echo $ticket['create_time']; ?></td>
+            <td><a href="#"><span data-feather="user"></span>Re-assign</a></td>
+            <?php endforeach; ?> </tr>
+</table>
         </table>
       </div>
     </main>

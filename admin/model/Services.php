@@ -5,6 +5,7 @@
         // Table
         private $db_table = "service";
         // Columns
+        public $num_rows;
         public $serviceID;
         public $name;
         public $comment;

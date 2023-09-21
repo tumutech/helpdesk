@@ -60,12 +60,12 @@
               Dashboard <span class="sr-only"></span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="attachments.php">
               <span data-feather="file"></span>
               Attachments
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="sla.php">
               <span data-feather="briefcase"></span>
