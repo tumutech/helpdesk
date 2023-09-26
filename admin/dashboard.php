@@ -4,7 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin dashboard</title>
-    <?php include_once("admin_template.php")?>
+    <?php
+    include_once './config/database.php';
+    include_once './model/Ticket.php';
+    $database = new Database();
+    $db = $database->getConnection();
+    $item = new Tickets($db);
+    $tickets = $item->getTickets();
+    include_once("admin_template.php");?>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -25,29 +32,48 @@
       <div class="card">
   <div class="card-body">
   <span data-feather="file"></span>
-    <h5 class="card-title">tickets</h5>
-    <h6 class="card-subtitle mb-2 text-muted">0</h6>
+    <h5 class="card-title">Tickets</h5>
+    <h6 class="card-subtitle mb-2 text-muted"><?php
+    $sql = 'SELECT COUNT(*) AS num_rows FROM open_tickets';
+    $result = $db->query($sql);
+    $num_rows = $result->fetchColumn();
+    echo ($num_rows);    
+    
+    ?></h6>
   </div>
 </div>
 <div class="card">
   <div class="card-body">
   <span data-feather="briefcase"></span>
     <h5 class="card-title">Services</h5>
-    <h6 class="card-subtitle mb-2 text-muted">0</h6>
+    <h6 class="card-subtitle mb-2 text-muted">
+      <?php
+    $sql = 'SELECT COUNT(*) AS num_rows FROM service';
+    $result = $db->query($sql);
+    $num_rows = $result->fetchColumn();
+    echo ($num_rows); ?></h6>
   </div>
 </div>
 <div class="card">
   <div class="card-body">
   <span data-feather="users"></span>
     <h5 class="card-title">Customers</h5>
-    <h6 class="card-subtitle mb-2 text-muted">0</h6>
+    <h6 class="card-subtitle mb-2 text-muted"><?php
+    $sql = 'SELECT COUNT(*) AS num_rows FROM customers';
+    $result = $db->query($sql);
+    $num_rows = $result->fetchColumn();
+    echo ($num_rows); ?></h6>
   </div>
 </div>
 <div class="card">
   <div class="card-body">
   <span data-feather="calendar"></span>
     <h5 class="card-title">Queues</h5>
-    <h6 class="card-subtitle mb-2 text-muted">0</h6>
+    <h6 class="card-subtitle mb-2 text-muted"><?php
+    $sql = 'SELECT COUNT(*) AS num_rows FROM service';
+    $result = $db->query($sql);
+    $num_rows = $result->fetchColumn();
+    echo ($num_rows); ?></h6>
   </div>
 </div>
       </div>
@@ -60,21 +86,14 @@
           <th> Message</th>
           <th>Created</th>
           <th>Actions</th>
-        <?php
-    include_once './config/database.php';
-    include_once './model/Ticket.php';
-    $database = new Database();
-    $db = $database->getConnection();
-    $item = new Tickets($db);
-$tickets = $item->getTickets();
-foreach ($tickets as $ticket):?>
+        <?php foreach ($tickets as $ticket):?>
 <tr>
             <td><?php echo $ticket['ticket_num']; ?></td>
             <td><?php echo $ticket['customer_userID']; ?></td>
             <!-- <td><?php echo $ticket['title']; ?></td> -->
             <td><?php echo $ticket['message']; ?></td>
             <td><?php echo $ticket['create_time']; ?></td>
-            <td><a href="#"><span data-feather="user"></span>Re-assign</a></td>
+            <td><a href="#" data-href="reassign.php?id=123"><span data-feather="user"></span>Re-assign</a></td>
             <?php endforeach; ?> </tr>
 </table>
         </table>
